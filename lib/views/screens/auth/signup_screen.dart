@@ -1,26 +1,35 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/views/screens/home_page.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:instagram_clone/views/widgets/input_field.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
+  final TextEditingController _emailcontroller = TextEditingController();
+  final TextEditingController _usernamecontroller = TextEditingController();
+  final TextEditingController _passwordcontroller = TextEditingController();
+  final TextEditingController _biocontroller = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 32),
           width: double.infinity,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Flexible(
                 flex: 2,
@@ -35,63 +44,83 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 25,
               ),
-              // Email Field
+              // Circle Avatar
+              Stack(
+                // alignment: Alignment.center,
+                children: [
+                  const CircleAvatar(
+                    radius: 64,
+                    backgroundImage: NetworkImage(
+                      "https://images.unsplash.com/photo-1481214110143-ed630356e1bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                    ),
+                  ),
+                  Positioned(
+                    left: 40,
+                    top: 40,
+                    child: IconButton(
+                      onPressed: () {},
+                      // If image selected dont show add icon
+                      icon: const Icon(CupertinoIcons.add),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              // Username
+              InputTextField(
+                hintText: "Username",
+                controller: _usernamecontroller,
+                inputTextType: TextInputType.text,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              // Email
               InputTextField(
                 hintText: "Email",
-                controller: _emailController,
+                controller: _emailcontroller,
                 inputTextType: TextInputType.emailAddress,
               ),
               const SizedBox(
                 height: 15,
               ),
-              // Password Field
+
+              // Bio
               InputTextField(
-                hintText: "Password",
-                controller: _passwordController,
-                isPass: true,
+                hintText: "Bio",
+                controller: _biocontroller,
                 inputTextType: TextInputType.text,
-              ),
-              // Forgot Password
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  child: const Text(
-                    "Forgot Password?",
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                ),
               ),
               const SizedBox(
                 height: 15,
               ),
-              // Login Button
+              // Password
+              InputTextField(
+                hintText: "Password",
+                controller: _passwordcontroller,
+                inputTextType: TextInputType.text,
+                isPass: true,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              // Button
               SizedBox(
                 height: 45,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ),
-                    );
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: const Text("Login"),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8))),
+                  child: const Text("Sign Up"),
                 ),
               ),
               const SizedBox(
                 height: 15,
               ),
-
-              // Sign Up
               Flexible(
                 flex: 2,
                 child: Container(),
@@ -109,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                       vertical: 8,
                     ),
                     child: const Text(
-                      "Don't have an account?",
+                      "Already have an account?",
                     ),
                   ),
                   const SizedBox(
@@ -120,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: const Text(
-                        "Sign Up",
+                        "Login",
                         style: TextStyle(
                             color: Colors.blue, fontWeight: FontWeight.bold),
                       ),

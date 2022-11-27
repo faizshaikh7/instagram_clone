@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/views/screens/auth/login_screen.dart';
+import 'package:instagram_clone/views/screens/auth/signup_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
           .copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
       // home: const ResponsiveLayout(
       //     appLayout: AppLayout(), webLayout: WebLayout()),
-      home: const LoginPage(),
+      home: const SignUpPage(),
     );
   }
 }
